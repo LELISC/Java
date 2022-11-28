@@ -1,0 +1,156 @@
+package src;
+
+import java.awt.Color;
+import java.awt.EventQueue;
+import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JTextField;
+import javax.swing.SwingConstants;
+import javax.swing.JTable;
+import javax.swing.JTextArea;
+
+public class Calcular_IMC {
+
+	private JFrame frame;
+	private JTextField txtCalculadoraImc;
+	private JTextField peso;
+	private JTextField txtPeso;
+	private JTextField txtAltura;
+	private JTextField altura;
+
+	/**
+	 * Launch the application.
+	 */
+	public static void main(String[] args) {
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					Calcular_IMC window = new Calcular_IMC();
+					window.frame.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+	}
+	
+
+    Double peso1,altura1;
+    Double soma;
+    float peso2;
+	private JTextField resposta;
+	AjudaImc escopo = new AjudaImc();
+	private JTable table_1;
+	
+	
+	public Calcular_IMC() {
+		initialize();
+	}
+
+	/**
+	 * Initialize the contents of the frame.
+	 */
+	private void initialize() {
+		frame = new JFrame();
+		frame.setResizable(false);
+		frame.getContentPane().setFont(new Font("Verdana", Font.PLAIN, 11));
+		frame.setBounds(100, 100, 450, 300);
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.getContentPane().setLayout(null);
+		
+		txtCalculadoraImc = new JTextField();
+		txtCalculadoraImc.setEditable(false);
+		txtCalculadoraImc.setBounds(0, 0, 434, 39);
+		txtCalculadoraImc.setForeground(new Color(184, 134, 11));
+		txtCalculadoraImc.setBackground(new Color(192, 192, 192));
+		txtCalculadoraImc.setFont(new Font("Algerian", Font.PLAIN, 24));
+		txtCalculadoraImc.setHorizontalAlignment(SwingConstants.CENTER);
+		txtCalculadoraImc.setText("CALCULADORA IMC");
+		frame.getContentPane().add(txtCalculadoraImc);
+		txtCalculadoraImc.setColumns(10);
+			
+		peso = new JTextField();
+		peso.setHorizontalAlignment(SwingConstants.CENTER);
+		peso.setBounds(215, 50, 156, 39);
+		frame.getContentPane().add(peso);
+		peso.setColumns(10);
+		
+		txtPeso = new JTextField();
+		txtPeso.setEditable(false);
+		txtPeso.setForeground(new Color(255, 248, 220));
+		txtPeso.setBackground(new Color(0, 0, 0));
+		txtPeso.setHorizontalAlignment(SwingConstants.CENTER);
+		txtPeso.setText("PESO");
+		txtPeso.setBounds(119, 59, 86, 20);
+		frame.getContentPane().add(txtPeso);
+		txtPeso.setColumns(10);
+		
+		txtAltura = new JTextField();
+		txtAltura.setEditable(false);
+		txtAltura.setBackground(new Color(0, 0, 0));
+		txtAltura.setForeground(new Color(255, 248, 220));
+		txtAltura.setText("ALTURA");
+		txtAltura.setHorizontalAlignment(SwingConstants.CENTER);
+		txtAltura.setColumns(10);
+		txtAltura.setBounds(119, 127, 86, 20);
+		frame.getContentPane().add(txtAltura);
+		
+		altura = new JTextField();
+		altura.setHorizontalAlignment(SwingConstants.CENTER);
+		altura.setColumns(10);
+		altura.setBounds(215, 118, 156, 39);
+		frame.getContentPane().add(altura);
+		
+		JButton btnNewButton = new JButton("CALCULAR");
+		btnNewButton.setBackground(new Color(192, 192, 192));
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			 peso1 = Double.parseDouble(peso.getText());
+			 altura1 = Double.parseDouble(altura.getText());
+			 soma = peso1/(altura1*altura1);
+		 
+			 if (soma <18.5) {
+				 
+				 resposta.setText(String.valueOf(escopo.nome+" "+soma+" e vocÃª estÃ¡ abaixo do peso"));
+			}else if (soma > 18.5 && soma < 24.9) {
+				
+				resposta.setText(String.valueOf(escopo.nome+" "+soma+" e vocÃª estÃ¡ no peso ideal, parabÃ©ns"));
+			}else if (soma > 25 && soma <29.9 ) {
+				
+				resposta.setText(String.valueOf(escopo.nome+" "+soma+" e vocÃª estÃ¡ acima do peso!"));
+			}else {
+				
+				resposta.setText(String.valueOf(escopo.nome+" "+soma+" e vocÃª estÃ¡ com obesidade!"));
+			}
+				
+		    
+			}
+		});
+		btnNewButton.setFont(new Font("Times New Roman", Font.PLAIN, 14));
+		btnNewButton.setBounds(245, 183, 109, 23);
+		frame.getContentPane().add(btnNewButton);
+		
+		resposta = new JTextField();
+		resposta.setForeground(new Color(0, 0, 0));
+		resposta.setEditable(false);
+		resposta.setBounds(20, 230, 393, 20);
+		frame.getContentPane().add(resposta);
+		resposta.setColumns(10);
+		
+		table_1 = new JTable();
+		table_1.setBackground(new Color(192, 192, 192));
+		table_1.setBounds(10, 50, 195, 155);
+		frame.getContentPane().add(table_1);
+		
+		JTextArea txtrResultado = new JTextArea();
+		txtrResultado.setBackground(new Color(248, 248, 255));
+		txtrResultado.setText("resultado");
+		txtrResultado.setBounds(20, 207, 77, 22);
+		frame.getContentPane().add(txtrResultado);
+		
+		
+	}
+}
